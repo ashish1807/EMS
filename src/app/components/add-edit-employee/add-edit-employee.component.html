@@ -1,0 +1,109 @@
+<div class="col d-flex justify-content-center align-items-center mt-1">
+  <div class="card w-50">
+    <div class="card-header">
+      {{
+        isDelete
+          ? "Delete Employee"
+          : employeeId
+          ? "Edit Employee"
+          : "Add Employee"
+      }}
+    </div>
+    <div class="card-body">
+      <fieldset [disabled]="isDelete">
+        <form [formGroup]="employeeForm" #form="ngForm">
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="firstName"
+              id="firstName"
+              formControlName="firstName"
+            />
+
+            <label for="lastName" class="form-label">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastName"
+              formControlName="lastName"
+            />
+
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              formControlName="email"
+            />
+
+            <label for="phone" class="form-label">Phone</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phone"
+              formControlName="phone"
+            />
+
+            <label for="dob" class="form-label">Date of Birth</label>
+            <input
+              type="date"
+              class="form-control"
+              id="dob"
+              formControlName="dob"
+              pattern="\d{4}-\d{2}-\d{2}"
+            />
+
+            <label for="doj" class="form-label">Date of Joining</label>
+            <input
+              type="date"
+              class="form-control"
+              id="doj"
+              formControlName="doj"
+              pattern="\d{4}-\d{2}-\d{2}"
+            />
+          </div>
+
+          <p
+            style="
+              display: block;
+              width: 100%;
+              text-align: center;
+              margin: 0 auto;
+            "
+            *ngIf="!isDelete"
+          >
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="saveEmployee()"
+            >
+              {{ employeeId ? "Update" : "Save" }}
+            </button>
+
+            <button
+              class="btn btn-secondary ms-2"
+              type="reset"
+              (click)="onReset()"
+            >
+              Reset
+            </button>
+          </p>
+        </form>
+      </fieldset>
+
+      <p
+        style="display: block; width: 100%; text-align: center; margin: 0 auto"
+      >
+        <button
+          class="btn btn-danger ms-2"
+          *ngIf="isDelete"
+          (click)="deleteEmployee()"
+        >
+          Delete
+        </button>
+      </p>
+    </div>
+  </div>
+</div>
